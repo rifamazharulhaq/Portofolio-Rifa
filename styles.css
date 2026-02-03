@@ -881,3 +881,8 @@ body.dark-mode .btn-cv-view {
     display: block;
     padding: 5px;
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
