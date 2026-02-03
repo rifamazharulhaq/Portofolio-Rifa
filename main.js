@@ -18,29 +18,31 @@ let letter = "";
 
 const changingText = document.getElementById("changing-text");
 
-(function type() {
-  if (count === texts.length) count = 0;
-  currentText = texts[count];
-  letter = currentText.slice(0, ++index);
-  changingText.textContent = letter;
+if (changingText){
+  (function type() {
+    if (count === texts.length) count = 0;
+    currentText = texts[count];
+    letter = currentText.slice(0, ++index);
+    changingText.textContent = letter;
 
-  changingText.classList.add("text-fade-in");
-  setTimeout(() => changingText.classList.remove("text-fade-in"), 300);
+    changingText.classList.add("text-fade-in");
+    setTimeout(() => changingText.classList.remove("text-fade-in"), 300);
 
-  if (letter.length === currentText.length) {
-    setTimeout(() => {
-      changingText.classList.add("text-fade-out");
+    if (letter.length === currentText.length) {
       setTimeout(() => {
-        changingText.classList.remove("text-fade-out");
-        count++;
-        index = 0;
-        setTimeout(type, 500);
-      }, 500);
-    }, 1000);
-  } else {
-    setTimeout(type, 50);
-  }
-})();
+        changingText.classList.add("text-fade-out");
+        setTimeout(() => {
+          changingText.classList.remove("text-fade-out");
+          count++;
+          index = 0;
+          setTimeout(type, 500);
+        }, 500);
+      }, 1000);
+    } else {
+      setTimeout(type, 50);
+    }
+  })();
+}
 
 const navbar = document.getElementById('navbar');
 const scrollToTopBtn = document.getElementById('scrollToTopBtn');
@@ -151,4 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleBtn.textContent = isDark ? '☀️' : '🌙';
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
+});
+
+document.querySelectorAll('img').forEach(img => {
+  img.setAttribute('loading', 'lazy');
 });
